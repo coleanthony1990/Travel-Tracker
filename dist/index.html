@@ -1,16 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Warnes">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Changa">
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Travel Tracker</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-  <script src="bundle.js"></script>
+  <nav id="navBar">
+    <section id="leftHeader">
+      <button class="leftHeaderButtons">Your Trips</button>
+      <button class="leftHeaderButtons">New Trip</button>
+    </section>
+    <section id="rightHeader">
+      <h3 id="nameOfUser">hello</h3>
+      <div id="logoAndSlogan">
+        <h1 id="logo">AROUND</h1>
+        <p id="slogan">SEE YOU AROUND</p>
+      </div>
+    </section>
+  </nav>
+  <main id="underNav">
+    <section class="your-trips" id="yourTrips">
+      <h1 id="yourTripsTitle">Your Trips</h1>
+      <div id="tripCardsContainer">
+          <article class="trip-card">
+            <img class="card-images" src="https://media.timeout.com/images/105211673/image.jpg" alt="roma">
+            <p class="destination">destination: </p>
+            <p class="date">date: </p>
+            <p class="duration">duration: </p>
+            <p class="traveler-count">Travelers: </p>
+            <p class="trip-status">Status: </p>
+          </article>
+          <article class="trip-card">
+            <img class="card-images" src="https://media.timeout.com/images/105211673/image.jpg" alt="roma">
+            <p class="destination">destination: </p>
+            <p class="date">date: </p>
+            <p class="duration">duration: </p>
+            <p class="traveler-count">Travelers: </p>
+            <p class="trip-status">Status: </p>
+          </article>
+          <article class="trip-card">
+            <img class="card-images" src="https://media.timeout.com/images/105211673/image.jpg" alt="roma">
+            <p class="destination">destination: </p>
+            <p class="date">date: </p>
+            <p class="duration">duration: </p>
+            <p class="traveler-count">Travelers: </p>
+            <p class="trip-status">Status: </p>
+          </article>
+      </div>
+      <article id="expenses">Total expenses this year: </article>
+    </section>
+    <section id="newTrip">
+      <h1 id="newTripTitle">New Trip</h1>
+      <form id="newTripForm">
+        <div class="form-arrangement"><label for="newTripDate">Departure:</label><input type="date" id="newTripDate" name="date" required></div>
+       
+        <div class="form-arrangement"><label for="newTripDuration">Duration:</label><input type="number" id="newTripDuration" name="duration" required></div>
+        
+        <div class="form-arrangement"><label for="travelerNumber">How many travelers?</label> <input type="number" id="travelerNumber" name="traveler amount" required></div>
+       
+        <div class="form-arrangement"><label for="newTripDestination">Destination:</label><select id="newTripDestination" name="destination" required></div>
 
+        <button type="submit" id="submitNewTrip">Get Trip Estimate</button>
+        
+      </form>
+      <h1 id="estimateValue">This trip's estimate is: </h1>
+    </section>
+  </main>
+  <script src="bundle.js"></script>
 </body>
 </html>
