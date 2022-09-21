@@ -57,10 +57,16 @@ body {
   flex-direction: column;
   margin-right: 20px;
 }
+#yourTrips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
 #yourTripsTitle {
   color: #3a3b3d;
   font-family: Changa;
-  font-size: 2.7vw;
+  font-size: 2.7rem;
 
 }
 #tripCardsContainer {
@@ -69,11 +75,22 @@ body {
   justify-content: space-around;
 }
 .trip-card {
-  border: 1px solid black;
-  width: 20%;
+  border: 1px solid grey;
+  width: 350px;
+  margin: 30px;
+  font-family: Changa;
+  box-shadow: 2px 2px 2px grey;
 }
 .card-images {
   width: 100%;
+}
+article > p {
+  margin-left: 10px;
+}
+#expenses {
+  margin: 20px;
+  font-family: Changa;
+  font-size: 2vw;;
 }
 
 #newTrip {
@@ -85,16 +102,20 @@ body {
 #newTripForm {
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  align-content: space-between;
+  height: 30vh;
 }
-input {
-  margin: 5px;
+
+input, select {
+  margin-top: 30px;
 
 }
 #submitNewTrip {
   font-family: Changa;
   background-color: #3a3b3d;
   color:#edecd5;
-  margin: 15px;
+  margin-top: 30px;
+  width: 13vw;
+  font-size: 1vw;
 }
-

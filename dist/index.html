@@ -50,20 +50,31 @@
             <p class="traveler-count">Travelers: </p>
             <p class="trip-status">Status: </p>
           </article>
+          <article class="trip-card">
+            <img class="card-images" src="https://media.timeout.com/images/105211673/image.jpg" alt="roma">
+            <p class="destination">destination: </p>
+            <p class="date">date: </p>
+            <p class="duration">duration: </p>
+            <p class="traveler-count">Travelers: </p>
+            <p class="trip-status">Status: </p>
+          </article>
       </div>
       <article id="expenses">Total expenses this year: </article>
     </section>
-    <section id="newTrip">
+    <section hidden id="newTrip hidden">
       <h1 id="newTripTitle">New Trip</h1>
       <form id="newTripForm">
-        <div class="form-arrangement"><label for="newTripDate">Departure:</label><input type="date" id="newTripDate" name="date" required></div>
+        <div class="form-arrangement"><label for="newTripDate">Departure:</label> <input type="date" id="newTripDate" name="date" required></div>
        
-        <div class="form-arrangement"><label for="newTripDuration">Duration:</label><input type="number" id="newTripDuration" name="duration" required></div>
+        <div class="form-arrangement"><label for="newTripDuration">Duration:</label> <input type="number" id="newTripDuration" name="duration" required></div>
         
         <div class="form-arrangement"><label for="travelerNumber">How many travelers?</label> <input type="number" id="travelerNumber" name="traveler amount" required></div>
        
-        <div class="form-arrangement"><label for="newTripDestination">Destination:</label><select id="newTripDestination" name="destination" required></div>
-
+        <div class="form-arrangement"><label for="newTripDestination">Destination:</label> <select id="newTripDestination" name="destination" placeholder="chosse a destination" required>
+          <option value="">Choose your next destination</option>
+        </select>
+      </div>
+          
         <button type="submit" id="submitNewTrip">Get Trip Estimate</button>
         
       </form>
