@@ -1,3 +1,128 @@
+/* ----------Nav Bar--------- */
+nav {
+  height: 20%;
+  width: 100%;
+  background-color: #3a3b3d;
+  display: flex;
+  justify-content: space-between;
+}
+
+#leftHeader {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 30%;
+  padding-bottom: 5px;
+}
+
+.leftHeaderButtons {
+  font-family: Changa;
+  color: #edecd5;
+  background-color: transparent;
+  border: none;
+  font-size: 2vw;
+}
+
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background: #edecd5
+}
+
+#logo {
+  font-family: Warnes;
+  font-size: 2.5vw;
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
+#slogan, #nameOfUser {
+  font-family: Changa;
+  font-size: 1vw;
+  margin-top: 0px;
+}
+
+#rightHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: flex-end;
+  color: #edecd5;
+}
+
+#logoAndSlogan {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 20px;
+}
+/* -------Your Trips Page-------- */
+#yourTrips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+#yourTripsTitle {
+  color: #3a3b3d;
+  font-family: Changa;
+  font-size: 2.7rem;
+
+}
+
+#tripCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.trip-card {
+  border: 1px solid grey;
+  width: 350px;
+  /* height: 600px; */
+  margin: 30px;
+  font-family: Changa;
+  box-shadow: 2px 2px 2px grey;
+}
+
+.card-images {
+  width: 100%;
+  height: 40%;
+}
+
+article > p {
+  margin-left: 10px;
+}
+
+#expenses {
+  margin: 20px;
+  font-family: Changa;
+  font-size: 2vw;;
+}
+/* ---------New Trip Page--------- */
+#newTrip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Changa;
+}
+
+#newTripForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+  height: 30vh;
+}
+
+input, select {
+  margin-top: 30px;
+}
+
+#submitNewTrip {
+  font-family: Changa;
+  background-color: #3a3b3d;
+  color:#edecd5;
+  margin-top: 30px;
+  width: 13vw;
+  font-size: 1vw;
 }
