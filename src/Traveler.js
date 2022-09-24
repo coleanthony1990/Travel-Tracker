@@ -1,9 +1,9 @@
 class Traveler {
-  constructor(details, tripData) {
+  constructor(details, tripData, destinaData) {
     this.id = details.id
     this.name = details.name
     this.type = details.travelerType
-    this.allUserTrips = tripData.filter(trip => trip.userID === this.id)
+    this.allUserTrips = tripData.trips.filter(trip => trip.userID === this.id)
   }
     
   getPendingTrips() {
@@ -33,12 +33,12 @@ class Traveler {
     const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
     
     const futureTrips = this.allUserTrips.filter((trip) => {
-      console.log(trip.date, todayDate)
+      
       if( trip.date > todayDate) {
         return trip
       }
     })
-    console.log(futureTrips)
+   
     return futureTrips
   }
 }
