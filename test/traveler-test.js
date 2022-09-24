@@ -5,8 +5,8 @@ import tripData from '../sample-data/trip-sample.js'
 
 
 describe('Traveler', () => {
-  let traveler, traveler1, traveler2, traveler3
-  let traveler1Data, traveler2Data, traveler3Data
+  let traveler, traveler1, traveler2, traveler3, traveler4
+  let traveler1Data, traveler2Data, traveler3Data, traveler4Data
 
   beforeEach(() => {
     traveler1Data = {
@@ -24,10 +24,16 @@ describe('Traveler', () => {
       name: "Sibby Dawidowitsch",
       travelerType: "shopper"
     }
-    traveler = new Traveler(travelers)
-    traveler1 = new Traveler(traveler1Data)
-    traveler2 = new Traveler(traveler2Data)
-    traveler3 = new Traveler(traveler3Data)
+    traveler4Data = {
+      id: 24,
+      name: "Rex Littleproud",
+      travelerType: "foodie"
+      }
+    traveler = new Traveler(travelers, tripData)
+    traveler1 = new Traveler(traveler1Data, tripData)
+    traveler2 = new Traveler(traveler2Data, tripData)
+    traveler3 = new Traveler(traveler3Data, tripData)
+    traveler4 = new Traveler(traveler4Data, tripData)
   })
 
   it('should be a function', () => {
@@ -49,7 +55,7 @@ describe('Traveler', () => {
     expect(traveler3.type).to.equal("shopper")
   })
   it('should be able to get trip data for user', () => {
-    expect(traveler1.getUserTrips(tripData)).to.deep.equal([
+    expect(traveler1.allUserTrips).to.deep.equal([
       {
         id: 117,
         userID: 1,
@@ -62,7 +68,7 @@ describe('Traveler', () => {
       }])
   })
   it('should be able to get pending trips', () => {
-    traveler2.getUserTrips(tripData)
+    
 
     expect(traveler2.getPendingTrips()).to.deep.equal([
       {
@@ -78,7 +84,7 @@ describe('Traveler', () => {
     ])
   })
   it ('should be able to get approved trips', () => {
-    traveler1.getUserTrips(tripData)
+   
     expect(traveler1.getApprovedTrips()).to.deep.equal([
       {
         id: 117,
@@ -92,5 +98,35 @@ describe('Traveler', () => {
       }
     ])
   })
+  it('should be able to get past trips', () => {
+    
+    expect(traveler1.getPastTrips()).to.deep.equal([
+      {
+        id: 117,
+        userID: 1,
+        destinationID: 28,
+        travelers: 3,
+        date: '2021/01/09',
+        duration: 15,
+        status: 'approved',
+        suggestedActivities: []
+      }
+    ])
+  })
+  it('should be able to get future trips', () => {
+    expect(traveler4.getFutureTrips()).to.deep.equal([
+      {
+        id: 9,
+        userID: 24,
+        destinationID: 19,
+        travelers: 5,
+        date: '2022/12/19',
+        duration: 19,
+        status: 'approved',
+        suggestedActivities: []
+      }
+    ])
+  })
+  
 
 })
