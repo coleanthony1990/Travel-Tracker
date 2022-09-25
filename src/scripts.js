@@ -39,14 +39,18 @@ window.addEventListener('load', fetchAllData)
 //functions
 function loadUserTrips() {
 currentUser.allUserTrips.forEach((trip)=> {
+  destinationData.destinations.forEach((destination) =>{
+    if (destination.id === trip.destinationID) {
   tripCardsContainer.innerHTML += `<article class="trip-card">
-  <img class="card-images" src="https://media.timeout.com/images/105211673/image.jpg" alt="roma" height="240px" width="350px">
-  <p class="destination">destination: ${trip.destinationID}</p>
+  <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
+  <p class="destination">destination: ${destination.destination}</p>
   <p class="date">date: ${trip.date}</p>
   <p class="duration">duration: ${trip.duration}</p>
   <p class="traveler-count">Travelers: ${trip.travelers}</p>
   <p class="trip-status">Status: ${trip.status}</p>
 </article>`
+    }
+})
 })
 }
 
