@@ -13,6 +13,7 @@ import Traveler from './Traveler.js';
 const tripCardsContainer = document.querySelector('#tripCardsContainer')
 const yearsExpense = document.querySelector('#expenses')
 const name = document.querySelector('#nameOfUser')
+const addDestinations = document.querySelector('#newTripDestination')
 
 let currentUser;
 let travelerData;
@@ -31,6 +32,7 @@ function fetchAllData() {
     loadUsername()
     loadUserTrips()
     loadYearsExpense()
+    addDestinationOptions()
   })
 }
 
@@ -74,3 +76,10 @@ function loadYearsExpense() {
   yearsExpense.innerHTML += `$${sum}`
 }
 
+function addDestinationOptions() {
+  destinationData.destinations.forEach((destination) => {
+
+  
+  addDestinations.innerHTML += `<option value="${destination.destination}">${destination.destination}</option>`
+})
+}
