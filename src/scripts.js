@@ -6,7 +6,7 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 
-import fetchData from './api-calls.js';
+import { fetchData, postData } from './api-calls.js';
 import Traveler from './Traveler.js';
 
 
@@ -14,6 +14,14 @@ const tripCardsContainer = document.querySelector('#tripCardsContainer')
 const yearsExpense = document.querySelector('#expenses')
 const name = document.querySelector('#nameOfUser')
 const addDestinations = document.querySelector('#newTripDestination')
+const newTripDate = document.getElementById('newTripDate')
+const newTripDuration = document.getElementById('newTripDuration')
+const travelerCount = document.getElementById('travelerNumber')
+const submitNewTrip = document.getElementById('submitNewTrip')
+const newTripForm = document.getElementById('newTripForm')
+const tripEstimate = document.getElementById('estimateValue')
+
+
 
 let currentUser;
 let travelerData;
@@ -27,7 +35,8 @@ function fetchAllData() {
     tripData = data[1],
     destinationData = data[2]
    
-    currentUser = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)], tripData, destinationData)
+    currentUser = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)], tripData)
+    
 
     loadUsername()
     loadUserTrips()
@@ -84,3 +93,51 @@ function addDestinationOptions() {
   addDestinations.innerHTML += `<option value="${destination.destination}">${destination.destination}</option>`
 })
 }
+
+newTripForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const formLocation = formData.get('destination')
+  const locationID = destinationData.destinations.find((destination) => destination.destination === formLocation) 
+  
+  const newTripData = {
+    id: Date.now(),
+    userID: currentUser.id,
+    destinationID: locationID.id,
+    travelers: formData.get('travelerAmount'),
+    date: formData.get('date'),
+    duration: parseInt(formData.get('duration')),
+    status: 'pending',
+    suggestedActivities: []
+  }
+
+  if (!newTripData.date.includes('/')) {
+    alert('Please enter date in the correct format')
+  } else {
+    postData('http://localhost:3001/api/v1/trips', newTripData) 
+    event.target.reset()
+  }
+  fetchNewData()
+
+})
+
+function fetchNewData() {
+  tripCardsContainer.innerHTML = ''
+  Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
+  .then((data) => {
+    travelerData = data[0],
+    tripData = data[1],
+    destinationData = data[2]
+
+})
+}
+newTripForm.addEventListener('change', (event) => {
+  let sum = 0
+  destinationData.destinations.forEach((destination) => {
+    if (destination.destination === addDestinations.value) {
+      const equation = (destination.estimatedLodgingCostPerDay * newTripDuration.value) + (destination.estimatedFlightCostPerPerson * travelerCount.value)
+      sum += (equation * .10) + equation
+    }
+  })
+  tripEstimate.innerHTML = `This trip's estimate is: $${sum}`
+})
