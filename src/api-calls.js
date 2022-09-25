@@ -10,4 +10,24 @@ const fetchData = (fileName) => {
     );
 };
 
-export default  fetchData 
+const postData = (url, newData) => {
+  const requestData = {
+    method: 'POST',
+    body: JSON.stringify(newData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  fetch(url, requestData)
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message) {
+        alert(data.message);
+      } else {
+        return data;
+      }
+    })
+    .catch((error) => alert(error));
+};
+
+export { fetchData, postData }
