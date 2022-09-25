@@ -11,6 +11,8 @@ import Traveler from './Traveler.js';
 
 
 const tripCardsContainer = document.querySelector('#tripCardsContainer')
+const yearsExpense = document.querySelector('#expenses')
+const name = document.querySelector('#nameOfUser')
 
 let currentUser;
 let travelerData;
@@ -25,9 +27,10 @@ function fetchAllData() {
     destinationData = data[2]
    
     currentUser = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)], tripData, destinationData)
-    console.log(currentUser)
 
+    loadUsername()
     loadUserTrips()
+    loadYearsExpense()
   })
 }
 
@@ -37,6 +40,11 @@ window.addEventListener('load', fetchAllData)
 
 
 //functions
+function loadUsername() {
+  name.innerHTML += currentUser.name
+}
+
+
 function loadUserTrips() {
 currentUser.allUserTrips.forEach((trip)=> {
   destinationData.destinations.forEach((destination) =>{
@@ -52,5 +60,17 @@ currentUser.allUserTrips.forEach((trip)=> {
     }
 })
 })
+}
+
+function loadYearsExpense() {
+  let sum = 0
+  currentUser.allUserTrips.forEach((trip) => {
+    destinationData.destinations.forEach((destination) => {
+      if (destination.id === trip.destinationID && trip.date.includes(new Date().getFullYear())) {
+         sum += (destination.estimatedLodgingCostPerDay * trip.duration) + (destination.estimatedFlightCostPerPerson * trip.travelers)
+      }
+    })
+  })
+  yearsExpense.innerHTML += `$${sum}`
 }
 
