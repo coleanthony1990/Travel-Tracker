@@ -69,7 +69,8 @@ function loadYearsExpense() {
   currentUser.allUserTrips.forEach((trip) => {
     destinationData.destinations.forEach((destination) => {
       if (destination.id === trip.destinationID && trip.date.includes(new Date().getFullYear())) {
-         sum += (destination.estimatedLodgingCostPerDay * trip.duration) + (destination.estimatedFlightCostPerPerson * trip.travelers)
+        const equation = (destination.estimatedLodgingCostPerDay * trip.duration) + (destination.estimatedFlightCostPerPerson * trip.travelers)
+         sum += (equation * .10) + equation
       }
     })
   })
