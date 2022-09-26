@@ -1,12 +1,12 @@
 import { expect } from 'chai';
-import travelers from '../sample-data/traveler-sample.js';
 import Traveler from '../src/Traveler.js';
-import tripData from '../sample-data/trip-sample.js'
+import tripData from '../sample-data/trip-sample.js';
+import travelers from '../sample-data/traveler-sample.js'
 
 
 describe('Traveler', () => {
-  let traveler, traveler1, traveler2, traveler3, traveler4
-  let traveler1Data, traveler2Data, traveler3Data, traveler4Data
+  let travelersData, traveler1, traveler2, traveler3, traveler4;
+  let traveler1Data, traveler2Data, traveler3Data, traveler4Data;
 
   beforeEach(() => {
     traveler1Data = {
@@ -28,8 +28,8 @@ describe('Traveler', () => {
       id: 24,
       name: "Rex Littleproud",
       travelerType: "foodie"
-      }
-    traveler = new Traveler(travelers, tripData)
+    }
+    travelersData = new Traveler(travelers, tripData)
     traveler1 = new Traveler(traveler1Data, tripData)
     traveler2 = new Traveler(traveler2Data, tripData)
     traveler3 = new Traveler(traveler3Data, tripData)
@@ -68,8 +68,6 @@ describe('Traveler', () => {
       }])
   })
   it('should be able to get pending trips', () => {
-    
-
     expect(traveler2.getPendingTrips()).to.deep.equal([
       {
         id: 171,
@@ -83,23 +81,7 @@ describe('Traveler', () => {
       }
     ])
   })
-  it ('should be able to get approved trips', () => {
-   
-    expect(traveler1.getApprovedTrips()).to.deep.equal([
-      {
-        id: 117,
-        userID: 1,
-        destinationID: 28,
-        travelers: 3,
-        date: '2021/01/09',
-        duration: 15,
-        status: 'approved',
-        suggestedActivities: []
-      }
-    ])
-  })
   it('should be able to get past trips', () => {
-    
     expect(traveler1.getPastTrips()).to.deep.equal([
       {
         id: 117,

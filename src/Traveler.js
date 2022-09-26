@@ -9,36 +9,25 @@ class Traveler {
   getPendingTrips() {
     const userPendingTrips = this.allUserTrips.filter(trip => trip.status === 'pending')
     return userPendingTrips
-  }
-  getApprovedTrips() {
-    const userApprovedTrips = this.allUserTrips.filter(trip => trip.status ==='approved')
-    return userApprovedTrips
+    
   }
   
   getPastTrips() {
-    const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
-    
+    const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
     const pastTrips = this.allUserTrips.filter((trip) => {
-    
       if( trip.date < todayDate) {
-
         return trip
       }
     })
-
     return pastTrips
   }
   getFutureTrips() {
-    
     const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
-    
     const futureTrips = this.allUserTrips.filter((trip) => {
-      
       if( trip.date > todayDate) {
         return trip
       }
     })
-   
     return futureTrips
   }
 }

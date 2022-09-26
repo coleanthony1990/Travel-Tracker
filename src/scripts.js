@@ -17,6 +17,7 @@ const upcomingTripCards = document.getElementById('UpcomingTripCardsContainer')
 const newTripButton = document.getElementById('newTripButton')
 const newTripPage = document.querySelector('#newTrip')
 const yourTripsPage = document.querySelector('.your-trips')
+const yourTripsButton = document.querySelector('#yourTripButton')
 
 let currentUser;
 let travelerData;
@@ -27,7 +28,6 @@ let destinationData;
 promiseAll().then((responses) => {
   assignData(responses)
     currentUser = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)], tripData)
-    console.log('1', currentUser)
     loadUsername()
     loadPendingUserTrips()
     loadPastUserTrips()
@@ -45,6 +45,7 @@ function assignData(responses) {
 //EventListeners
 window.addEventListener('load', promiseAll)
 newTripButton.addEventListener('click', showNewTrip)
+yourTripsButton.addEventListener('click', showYourTrips)
 
 //functions
 function loadUsername() {
@@ -52,10 +53,11 @@ function loadUsername() {
 }
 
 function loadPendingUserTrips() {
-currentUser.allUserTrips.forEach((trip)=> {
+currentUser.getPendingTrips().forEach((trip)=> {
   destinationData.destinations.forEach((destination) =>{
-    if (destination.id === trip.destinationID && trip.status === 'pending') {
-  pendingTripCards.innerHTML += `<article class="trip-card">
+    if (destination.id === trip.destinationID) {
+  pendingTripCards.innerHTML += `<h1>Pending Trips</h1>
+  <article class="trip-card">
   <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
   <p class="destination">destination: ${destination.destination}</p>
   <p class="date">date: ${trip.date}</p>
@@ -69,10 +71,9 @@ currentUser.allUserTrips.forEach((trip)=> {
 }
 
 function loadPastUserTrips() {
-  const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
-  currentUser.allUserTrips.forEach((trip)=> {
+  currentUser.getPastTrips().forEach((trip)=> {
     destinationData.destinations.forEach((destination) =>{
-      if (destination.id === trip.destinationID && trip.date < todayDate && trip.status === 'approved') {
+      if (destination.id === trip.destinationID && trip.status === 'approved') {
     pastTripCards.innerHTML += `<article class="trip-card">
     <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
     <p class="destination">destination: ${destination.destination}</p>
@@ -87,11 +88,9 @@ function loadPastUserTrips() {
   }
 
   function loadUpcomingUserTrips() {
-    const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
-    console.log(todayDate)
-    currentUser.allUserTrips.forEach((trip)=> {
+    currentUser.getFutureTrips().forEach((trip)=> {
       destinationData.destinations.forEach((destination) =>{
-        if (destination.id === trip.destinationID && trip.date > todayDate && trip.status === 'approved' ) {
+        if (destination.id === trip.destinationID && trip.status === 'approved' ) {
       upcomingTripCards.innerHTML += `<article class="trip-card">
       <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
       <p class="destination">destination: ${destination.destination}</p>
@@ -115,7 +114,7 @@ function loadYearsExpense() {
       }
     })
   })
-  yearsExpense.innerHTML += `$${sum}`
+  yearsExpense.innerHTML += `Total expenses this year: $${sum}`
 }
 
 function addDestinationOptions() {
@@ -136,7 +135,7 @@ newTripForm.addEventListener('submit', (event) => {
     id: Date.now(),
     userID: currentUser.id,
     destinationID: locationID.id,
-    travelers: formData.get('travelerAmount'),
+    travelers: parseInt(formData.get('travelerAmount')),
     date: formData.get('date'),
     duration: parseInt(formData.get('duration')),
     status: 'pending',
@@ -150,6 +149,7 @@ newTripForm.addEventListener('submit', (event) => {
       (data) => {
       assignData(data),
       currentUser.allUserTrips = tripData.trips.filter(trip => trip.userID === currentUser.id)
+      pendingTripCards.innerHTML = ''
       yearsExpense.innerHTML =''
       loadPendingUserTrips()
       loadYearsExpense()
@@ -173,4 +173,9 @@ function showNewTrip() {
   console.log('hey')
   newTripPage.classList.remove('hidden')
   yourTripsPage.classList.add('hidden')
+}
+
+function showYourTrips() {
+  newTripPage.classList.add('hidden')
+  yourTripsPage.classList.remove('hidden')
 }
