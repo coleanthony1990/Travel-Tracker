@@ -80,7 +80,6 @@ describe('Traveler', () => {
         suggestedActivities: []
       }
     ])
-    expect(traveler1.getPendingTrips()).to.equal('sorry, no pending trips')
   })
   it('should be able to get past trips', () => {
     expect(traveler1.getPastTrips()).to.deep.equal([

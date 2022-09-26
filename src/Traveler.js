@@ -8,11 +8,8 @@ class Traveler {
     
   getPendingTrips() {
     const userPendingTrips = this.allUserTrips.filter(trip => trip.status === 'pending')
-    if (!userPendingTrips) {
-      console.log('sorry, no pending trips')
-    } else {
     return userPendingTrips
-    }
+    
   }
   
   getPastTrips() {
@@ -22,9 +19,6 @@ class Traveler {
         return trip
       }
     })
-    if (!pastTrips) {
-      console.log('sorry, no past Trips')
-    } else
     return pastTrips
   }
   getFutureTrips() {
@@ -34,12 +28,8 @@ class Traveler {
         return trip
       }
     })
-    if (!futureTrips) {
-      console.log('sorry, no future trips')
-    } else {
     return futureTrips
   }
-}
 }
 
 
