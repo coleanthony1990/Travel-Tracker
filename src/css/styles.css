@@ -11,6 +11,14 @@
   font-size: 3rem;
 }
 
+
+.login-button {
+  background-color: #3a3b3d;
+  color: #edecd5;
+  width: 10vw;
+  font-family: Changa;
+  font-size: 1.1vw;
+}
 /* ----------Nav Bar--------- */
 
 

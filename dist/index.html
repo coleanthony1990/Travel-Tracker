@@ -11,13 +11,13 @@
 <body>
   <section class="login-page">
     <form class="login-form">
-      <h1 class="login-header">Around </h1>
-      <label class="login-input" for="usernameInput">Username:</label><br>
-      <input class="login-input" id="usernameInput" type="text" placeholder="username" required/><br><br>
-      <label class="login-input" for="passwordInput">Password:</label><br>
-      <input class="login-input" id="passwordInput" type="password" placeholder="password" required/><br><br>
-      <p class="error-message"></p>
-      <button class="login-submit-btn">Submit</button>
+      <h1 class="login-header">AROUND </h1>
+      <label for="usernameInput">Username:</label><br>
+      <input id="usernameInput" type="text" placeholder="username" required/><br><br>
+      <label for="passwordInput">Password:</label><br>
+      <input id="passwordInput" type="password" placeholder="password" required/><br><br>
+      <p class="error"></p>
+      <button type="submit" class="login-button">Submit</button>
     </form>
   </section>
   <nav id="navBar" class="nav-bar hidden">
@@ -26,7 +26,7 @@
       <button class="leftHeaderButtons" id="newTripButton">New Trip</button>
     </section>
     <section id="rightHeader">
-      <h3 id="nameOfUser">hello, </h3>
+      <h2 id="nameOfUser">hello, </h2>
       <div id="logoAndSlogan">
         <h1 id="logo">AROUND</h1>
         <p id="slogan">SEE YOU AROUND</p>
@@ -39,6 +39,7 @@
       <article id="expenses"></article>
       <div id="tripCards">
         <div id="pendingTripCardsContainer" class="card-containers">
+          <h1>Pending Trips</h1>
         </div>
         <div id="pastTripCardsContainer" class="card-containers">
           <h1>Past Trips</h1>
