@@ -1,4 +1,6 @@
 /* ----------Nav Bar--------- */
+
+
 nav {
   height: 20%;
   width: 100%;
@@ -56,7 +58,7 @@ body {
   margin-right: 20px;
 }
 /* -------Your Trips Page-------- */
-#yourTrips {
+.your-trips {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,7 +120,7 @@ article > p {
   font-size: 2vw;;
 }
 /* ---------New Trip Page--------- */
-#newTrip {
+.new-trip {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -149,4 +151,3 @@ input, select {
 .hidden {
   display: none;
 }
-

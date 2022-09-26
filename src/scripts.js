@@ -17,6 +17,7 @@ const upcomingTripCards = document.getElementById('UpcomingTripCardsContainer')
 const newTripButton = document.getElementById('newTripButton')
 const newTripPage = document.querySelector('#newTrip')
 const yourTripsPage = document.querySelector('.your-trips')
+const yourTripsButton = document.querySelector('#yourTripButton')
 
 let currentUser;
 let travelerData;
@@ -44,6 +45,7 @@ function assignData(responses) {
 //EventListeners
 window.addEventListener('load', promiseAll)
 newTripButton.addEventListener('click', showNewTrip)
+yourTripsButton.addEventListener('click', showYourTrips)
 
 //functions
 function loadUsername() {
@@ -171,4 +173,9 @@ function showNewTrip() {
   console.log('hey')
   newTripPage.classList.remove('hidden')
   yourTripsPage.classList.add('hidden')
+}
+
+function showYourTrips() {
+  newTripPage.classList.add('hidden')
+  yourTripsPage.classList.remove('hidden')
 }

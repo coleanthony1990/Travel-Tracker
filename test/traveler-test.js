@@ -29,8 +29,8 @@ describe('Traveler', () => {
       name: "Rex Littleproud",
       travelerType: "foodie"
     }
-    // travelersData = new Traveler(travelers, tripData)
-    // traveler1 = new Traveler(traveler1Data, tripData)
+    travelersData = new Traveler(travelers, tripData)
+    traveler1 = new Traveler(traveler1Data, tripData)
     traveler2 = new Traveler(traveler2Data, tripData)
     traveler3 = new Traveler(traveler3Data, tripData)
     traveler4 = new Traveler(traveler4Data, tripData)
@@ -80,6 +80,7 @@ describe('Traveler', () => {
         suggestedActivities: []
       }
     ])
+    expect(traveler1.getPendingTrips()).to.equal('sorry, no pending trips')
   })
   it('should be able to get past trips', () => {
     expect(traveler1.getPastTrips()).to.deep.equal([
