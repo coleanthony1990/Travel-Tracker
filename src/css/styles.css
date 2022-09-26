@@ -1,3 +1,16 @@
+/*---------login----------*/
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-top: 10%;
+}
+.login-header {
+  font-family: Warnes;
+  font-size: 3rem;
+}
+
 /* ----------Nav Bar--------- */
 
 
