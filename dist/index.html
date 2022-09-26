@@ -12,7 +12,7 @@
   <nav id="navBar">
     <section id="leftHeader">
       <button class="leftHeaderButtons">Your Trips</button>
-      <button class="leftHeaderButtons">New Trip</button>
+      <button class="leftHeaderButtons" id="newTripButton">New Trip</button>
     </section>
     <section id="rightHeader">
       <h3 id="nameOfUser">hello, </h3>
@@ -25,6 +25,7 @@
   <main id="underNav">
     <section class="your-trips" id="yourTrips">
       <h1 id="yourTripsTitle">Your Trips</h1>
+      <article id="expenses">Total expenses this year: </article>
       <div id="tripCards">
         <div id="pendingTripCardsContainer" class="card-containers">
           <h1>Pending Trips</h1>
@@ -36,7 +37,6 @@
           <h1>Upcoming Trips</h1>
         </div>
       </div>
-      <article id="expenses">Total expenses this year: </article>
     </section>
     <section hidden id="newTrip">
       <h1 id="newTripTitle">New Trip</h1>
@@ -48,7 +48,7 @@
           <option value="">Choose your next destination</option>
         </select>
         </div>
-        <button type="submit" id="submitNewTrip">Get Trip Estimate</button>
+        <button type="submit" id="submitNewTrip">Book Trip</button>
         <h1 id="estimateValue">This trip's estimate is: </h1>
       </form>
     </section>
