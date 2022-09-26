@@ -44,7 +44,7 @@ function checkLogin(event) {
   let password = loginPassword.value;
   let usernameID = username.split(/(\d+)/);
 
-  if(password === 'travel' && usernameID[0] === 'traveler' && usernameID[1] > 0 && usernameID[1] < 51) {
+  if(usernameID[0] === 'traveler' && usernameID[1] > 0 && usernameID[1] < 51 && password === 'travel') {
     loginPage.classList.add('hidden');
     navBar.classList.remove('hidden');
     yourTripsPage.classList.remove('hidden')
