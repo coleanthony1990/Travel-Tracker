@@ -12,7 +12,7 @@
   <nav id="navBar">
     <section id="leftHeader">
       <button class="leftHeaderButtons">Your Trips</button>
-      <button class="leftHeaderButtons">New Trip</button>
+      <button class="leftHeaderButtons" id="newTripButton">New Trip</button>
     </section>
     <section id="rightHeader">
       <h3 id="nameOfUser">hello, </h3>
@@ -25,11 +25,20 @@
   <main id="underNav">
     <section class="your-trips" id="yourTrips">
       <h1 id="yourTripsTitle">Your Trips</h1>
-      <div id="tripCardsContainer">
-      </div>
       <article id="expenses">Total expenses this year: </article>
+      <div id="tripCards">
+        <div id="pendingTripCardsContainer" class="card-containers">
+          <h1>Pending Trips</h1>
+        </div>
+        <div id="pastTripCardsContainer" class="card-containers">
+          <h1>Past Trips</h1>
+        </div>
+        <div id="UpcomingTripCardsContainer" class="card-containers">
+          <h1>Upcoming Trips</h1>
+        </div>
+      </div>
     </section>
-    <section hidden id="newTrip">
+    <section id="newTrip" class="new-trip hidden">
       <h1 id="newTripTitle">New Trip</h1>
       <form id="newTripForm">
         <div class="form-arrangement"><label for="newTripDate">Departure:</label> <input type="text" id="newTripDate" placeholder="yyyy/mm/dd" name="date" required></div>
@@ -38,8 +47,8 @@
         <div class="form-arrangement"><label for="newTripDestination">Destination:</label> <select id="newTripDestination" name="destination" required>
           <option value="">Choose your next destination</option>
         </select>
-      </div>
-        <button type="submit" id="submitNewTrip">Get Trip Estimate</button>
+        </div>
+        <button type="submit" id="submitNewTrip">Book Trip</button>
         <h1 id="estimateValue">This trip's estimate is: </h1>
       </form>
     </section>

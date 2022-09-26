@@ -1,16 +1,8 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-
-import { fetchData, postData } from './api-calls.js';
+import { postData, promiseAll } from './api-calls.js';
 import Traveler from './Traveler.js';
 
-
-const tripCardsContainer = document.querySelector('#tripCardsContainer')
+const pendingTripCards = document.querySelector('#pendingTripCardsContainer')
 const yearsExpense = document.querySelector('#expenses')
 const name = document.querySelector('#nameOfUser')
 const addDestinations = document.querySelector('#newTripDestination')
@@ -20,47 +12,50 @@ const travelerCount = document.getElementById('travelerNumber')
 const submitNewTrip = document.getElementById('submitNewTrip')
 const newTripForm = document.getElementById('newTripForm')
 const tripEstimate = document.getElementById('estimateValue')
-
-
+const pastTripCards = document.getElementById('pastTripCardsContainer')
+const upcomingTripCards = document.getElementById('UpcomingTripCardsContainer')
+const newTripButton = document.getElementById('newTripButton')
+const newTripPage = document.querySelector('#newTrip')
+const yourTripsPage = document.querySelector('.your-trips')
 
 let currentUser;
 let travelerData;
 let tripData;
 let destinationData;
 
-function fetchAllData() {
-  Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
-  .then((data) => {
-    travelerData = data[0],
-    tripData = data[1],
-    destinationData = data[2]
-   
+//------Promises
+promiseAll().then((responses) => {
+  assignData(responses)
     currentUser = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)], tripData)
-    
-
+    console.log('1', currentUser)
     loadUsername()
-    loadUserTrips()
+    loadPendingUserTrips()
+    loadPastUserTrips()
+    loadUpcomingUserTrips()
     loadYearsExpense()
     addDestinationOptions()
   })
+
+function assignData(responses) {
+    travelerData = responses[0]
+    tripData = responses[1]
+    destinationData = responses[2]
 }
 
 //EventListeners
-window.addEventListener('load', fetchAllData)
-
-
+window.addEventListener('load', promiseAll)
+newTripButton.addEventListener('click', showNewTrip)
 
 //functions
 function loadUsername() {
   name.innerHTML += currentUser.name
 }
 
-
-function loadUserTrips() {
+function loadPendingUserTrips() {
 currentUser.allUserTrips.forEach((trip)=> {
   destinationData.destinations.forEach((destination) =>{
-    if (destination.id === trip.destinationID) {
-  tripCardsContainer.innerHTML += `<article class="trip-card">
+    if (destination.id === trip.destinationID && trip.status === 'pending') {
+  pendingTripCards.innerHTML += `<article class="trip-card">
   <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
   <p class="destination">destination: ${destination.destination}</p>
   <p class="date">date: ${trip.date}</p>
@@ -68,10 +63,47 @@ currentUser.allUserTrips.forEach((trip)=> {
   <p class="traveler-count">Travelers: ${trip.travelers}</p>
   <p class="trip-status">Status: ${trip.status}</p>
 </article>`
-    }
+} 
 })
 })
 }
+
+function loadPastUserTrips() {
+  const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
+  currentUser.allUserTrips.forEach((trip)=> {
+    destinationData.destinations.forEach((destination) =>{
+      if (destination.id === trip.destinationID && trip.date < todayDate && trip.status === 'approved') {
+    pastTripCards.innerHTML += `<article class="trip-card">
+    <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
+    <p class="destination">destination: ${destination.destination}</p>
+    <p class="date">date: ${trip.date}</p>
+    <p class="duration">duration: ${trip.duration}</p>
+    <p class="traveler-count">Travelers: ${trip.travelers}</p>
+    <p class="trip-status">Status: ${trip.status}</p>
+  </article>`
+      }
+  })
+  })
+  }
+
+  function loadUpcomingUserTrips() {
+    const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
+    console.log(todayDate)
+    currentUser.allUserTrips.forEach((trip)=> {
+      destinationData.destinations.forEach((destination) =>{
+        if (destination.id === trip.destinationID && trip.date > todayDate && trip.status === 'approved' ) {
+      upcomingTripCards.innerHTML += `<article class="trip-card">
+      <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
+      <p class="destination">destination: ${destination.destination}</p>
+      <p class="date">date: ${trip.date}</p>
+      <p class="duration">duration: ${trip.duration}</p>
+      <p class="traveler-count">Travelers: ${trip.travelers}</p>
+      <p class="trip-status">Status: ${trip.status}</p>
+    </article>`
+        }
+    })
+    })
+    }
 
 function loadYearsExpense() {
   let sum = 0
@@ -88,15 +120,15 @@ function loadYearsExpense() {
 
 function addDestinationOptions() {
   destinationData.destinations.forEach((destination) => {
-
-  
   addDestinations.innerHTML += `<option value="${destination.destination}">${destination.destination}</option>`
 })
 }
 
+/////posting and getting new data------------
+
 newTripForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const formData = new FormData(event.target);
+  event.preventDefault()
+  const formData = new FormData(event.target)
   const formLocation = formData.get('destination')
   const locationID = destinationData.destinations.find((destination) => destination.destination === formLocation) 
   
@@ -110,28 +142,23 @@ newTripForm.addEventListener('submit', (event) => {
     status: 'pending',
     suggestedActivities: []
   }
-
   if (!newTripData.date.includes('/')) {
     alert('Please enter date in the correct format')
   } else {
-    postData('http://localhost:3001/api/v1/trips', newTripData) 
+    postData(newTripData)
+    .then(
+      (data) => {
+      assignData(data),
+      currentUser.allUserTrips = tripData.trips.filter(trip => trip.userID === currentUser.id)
+      yearsExpense.innerHTML =''
+      loadPendingUserTrips()
+      loadYearsExpense()
+      })
     event.target.reset()
   }
-  fetchNewData()
-
 })
 
-function fetchNewData() {
-  tripCardsContainer.innerHTML = ''
-  Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
-  .then((data) => {
-    travelerData = data[0],
-    tripData = data[1],
-    destinationData = data[2]
-
-})
-}
-newTripForm.addEventListener('change', (event) => {
+newTripForm.addEventListener('change', () => {
   let sum = 0
   destinationData.destinations.forEach((destination) => {
     if (destination.destination === addDestinations.value) {
@@ -141,3 +168,9 @@ newTripForm.addEventListener('change', (event) => {
   })
   tripEstimate.innerHTML = `This trip's estimate is: $${sum}`
 })
+
+function showNewTrip() {
+  console.log('hey')
+  newTripPage.classList.remove('hidden')
+  yourTripsPage.classList.add('hidden')
+}

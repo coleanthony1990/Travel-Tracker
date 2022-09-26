@@ -10,24 +10,25 @@ const fetchData = (fileName) => {
     );
 };
 
-const postData = (url, newData) => {
-  const requestData = {
+const promiseAll = () => {
+  const result = Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
+  .then((response) => {
+    return response
+  })
+  return result
+}
+
+const postData = (data) => {
+  return fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
-    body: JSON.stringify(newData),
+    body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',
     },
-  };
-  fetch(url, requestData)
+  })
     .then((response) => response.json())
-    .then((data) => {
-      if (data.message) {
-        alert(data.message);
-      } else {
-        return data;
-      }
-    })
+    .then((response) => promiseAll())
     .catch((error) => alert(error));
 };
 
-export { fetchData, postData }
+export { postData, promiseAll}
