@@ -17,6 +17,7 @@ const promiseAll = () => {
   })
   return result
 }
+
 const postData = (data) => {
   return fetch('http://localhost:3001/api/v1/trips', {
     method: 'POST',
@@ -30,4 +31,4 @@ const postData = (data) => {
     .catch((error) => alert(error));
 };
 
-export { fetchData, postData, promiseAll}
+export { postData, promiseAll}
