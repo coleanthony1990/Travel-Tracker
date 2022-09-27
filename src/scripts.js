@@ -3,6 +3,7 @@ import { postData, promiseAll } from './api-calls.js';
 import Traveler from './Traveler.js';
 import dayjs from 'dayjs';
 
+
 const pendingTripCards = document.querySelector('#pendingTripCardsContainer')
 const yearsExpense = document.querySelector('#expenses')
 const name = document.querySelector('#nameOfUser')
@@ -84,7 +85,6 @@ function loadUsername() {
 }
 
 function showNewTrip() {
-  console.log('hey')
   newTripPage.classList.remove('hidden')
   yourTripsPage.classList.add('hidden')
 }
@@ -170,9 +170,11 @@ function addDestinationOptions() {
 
 newTripForm.addEventListener('submit', (event) => {
   event.preventDefault()
+  const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
   const dateValue = dayjs(newTripDate.value).format().slice(0, 10).split('-').join('/');
   const locationID = destinationData.destinations.find((destination) => destination.destination === addDestinations.value) 
   const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
+
   
   const newTripData = {
     id: Date.now(),
@@ -184,6 +186,7 @@ newTripForm.addEventListener('submit', (event) => {
     status: 'pending',
     suggestedActivities: []
   }
+
   if (dateValue > todayDate) {
     alert('Please choose a date in the future')
   } else {
