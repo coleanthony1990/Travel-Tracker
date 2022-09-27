@@ -9,7 +9,7 @@
 - [Getting Started](#getting-started)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Accessibilty](#Accessibilty)
+- [Accessibility](#Accessibility)
 - [Testing](#testing)
 - [Contact](#contact)
 - [Acknowledgments](#acknowledgments)
@@ -82,14 +82,16 @@ The program displays user data through individual trip cards and the user can al
 
 [screen-recorder-tue-sep-27-2022-10-50-41.webm](https://user-images.githubusercontent.com/103971359/192587834-3a30d761-d2d4-457e-b95a-1feaa2ab5215.webm)
 
-## Accessibilty
-This application has 0 errors on the WAVE(Web Accessibility Evaluation Tool) and a score of 100% with Lighthouse.
-
 New feature ideas: 
 - [ ] A login for a travel agency
     - [x] the travel agent will be able to approve bookings that are pending.
 - [ ] Add a a year-by-year graph of the users trip activity.
 - [ ] Users will be able to click on the trip card to display more information about the trip
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Accessibility
+This application has 0 errors on the WAVE(Web Accessibility Evaluation Tool) and a score of 100% with Lighthouse.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
