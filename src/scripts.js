@@ -10,7 +10,6 @@ const addDestinations = document.querySelector('#newTripDestination')
 const newTripDate = document.getElementById('newTripDate')
 const newTripDuration = document.getElementById('newTripDuration')
 const travelerCount = document.getElementById('travelerNumber')
-const submitNewTrip = document.getElementById('submitNewTrip')
 const newTripForm = document.getElementById('newTripForm')
 const tripEstimate = document.getElementById('estimateValue')
 const pastTripCards = document.getElementById('pastTripCardsContainer')
@@ -19,13 +18,6 @@ const newTripButton = document.getElementById('newTripButton')
 const newTripPage = document.querySelector('#newTrip')
 const yourTripsPage = document.querySelector('.your-trips')
 const yourTripsButton = document.querySelector('#yourTripButton')
-const navBar = document.querySelector('.nav-bar');
-const loginPage = document.querySelector('.login-page');
-const loginForm = document.querySelector('.login-form');
-const loginUsername = document.querySelector('#usernameInput');
-const loginPassword = document.querySelector('#passwordInput');
-const loginError = document.querySelector('.error');
-const loginButton = document.querySelector('.login-button')
 
 let currentUser;
 let travelerData;
