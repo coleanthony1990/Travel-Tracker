@@ -1,3 +1,26 @@
+/*---------login----------*/
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-top: 10%;
+}
+.login-header {
+  font-family: Warnes;
+  font-size: 3rem;
+}
+.login-inputs {
+  font-family: Changa;
+}
+
+.login-button {
+  background-color: #3a3b3d;
+  color: #edecd5;
+  width: 10vw;
+  font-family: Changa;
+  font-size: 1.1vw;
+}
 /* ----------Nav Bar--------- */
 
 
@@ -142,6 +165,9 @@ article > p {
 
 input, select {
   margin-top: 30px;
+}
+.new-trip-inputs {
+  font-family: Changa;
 }
 
 #submitNewTrip {

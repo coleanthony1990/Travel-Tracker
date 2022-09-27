@@ -9,13 +9,24 @@
   <title>Travel Tracker</title>
 </head>
 <body>
-  <nav id="navBar">
+  <section class="login-page">
+    <form class="login-form">
+      <h1 class="login-header">AROUND </h1>
+      <label class="login-inputs" for="usernameInput">Username:</label><br>
+      <input class="login-inputs" id="usernameInput" type="text" placeholder="username" required/><br><br>
+      <label class="login-inputs" for="passwordInput">Password:</label><br>
+      <input class="login-inputs" id="passwordInput" type="password" placeholder="password" required/><br><br>
+      <p class="error"></p>
+      <button type="submit" class="login-button">Submit</button>
+    </form>
+  </section>
+  <nav id="navBar" class="nav-bar hidden">
     <section id="leftHeader">
       <button class="leftHeaderButtons" id="yourTripButton">Your Trips</button>
       <button class="leftHeaderButtons" id="newTripButton">New Trip</button>
     </section>
     <section id="rightHeader">
-      <h3 id="nameOfUser">hello, </h3>
+      <h2 id="nameOfUser">hello, </h2>
       <div id="logoAndSlogan">
         <h1 id="logo">AROUND</h1>
         <p id="slogan">SEE YOU AROUND</p>
@@ -23,11 +34,12 @@
     </section>
   </nav>
   <main id="underNav">
-    <section class="your-trips" id="yourTrips">
+    <section class="your-trips hidden" id="yourTrips">
       <h1 id="yourTripsTitle">Your Trips</h1>
       <article id="expenses"></article>
       <div id="tripCards">
         <div id="pendingTripCardsContainer" class="card-containers">
+          <h1>Pending Trips</h1>
         </div>
         <div id="pastTripCardsContainer" class="card-containers">
           <h1>Past Trips</h1>
@@ -40,10 +52,10 @@
     <section id="newTrip" class="new-trip hidden">
       <h1 id="newTripTitle">New Trip</h1>
       <form id="newTripForm">
-        <div class="form-arrangement"><label for="newTripDate">Departure:</label> <input type="date" id="newTripDate" placeholder="yyyy/mm/dd" name="date" required></div>
-        <div class="form-arrangement"><label for="newTripDuration">Duration:</label> <input type="number" id="newTripDuration" name="duration" required></div>
-        <div class="form-arrangement"><label for="travelerNumber">How many travelers?</label> <input type="number" id="travelerNumber" name="travelerAmount" required></div>
-        <div class="form-arrangement"><label for="newTripDestination">Destination:</label> <select id="newTripDestination" name="destination" required>
+        <div class="form-arrangement"><label for="newTripDate">Departure:</label> <input type="text" class="new-trip-inputs" id="newTripDate" placeholder="yyyy/mm/dd" name="date" required></div>
+        <div class="form-arrangement"><label for="newTripDuration">Duration:</label> <input type="number" class="new-trip-inputs" id="newTripDuration" name="duration" required></div>
+        <div class="form-arrangement"><label for="travelerNumber">How many travelers?</label> <input type="number" class="new-trip-inputs" id="travelerNumber" name="travelerAmount" required></div>
+        <div class="form-arrangement"><label for="newTripDestination">Destination:</label> <select id="newTripDestination" class="new-trip-inputs" name="destination" required>
           <option value="">Choose your next destination</option>
         </select>
         </div>

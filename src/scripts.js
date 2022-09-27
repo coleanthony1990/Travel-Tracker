@@ -19,23 +19,58 @@ const newTripButton = document.getElementById('newTripButton')
 const newTripPage = document.querySelector('#newTrip')
 const yourTripsPage = document.querySelector('.your-trips')
 const yourTripsButton = document.querySelector('#yourTripButton')
+const navBar = document.querySelector('.nav-bar');
+const loginPage = document.querySelector('.login-page');
+const loginForm = document.querySelector('.login-form');
+const loginUsername = document.querySelector('#usernameInput');
+const loginPassword = document.querySelector('#passwordInput');
+const loginError = document.querySelector('.error');
+const loginButton = document.querySelector('.login-button')
 
 let currentUser;
 let travelerData;
 let tripData;
 let destinationData;
 
-//------Promises
-promiseAll().then((responses) => {
-  assignData(responses)
-    currentUser = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)], tripData)
-    loadUsername()
-    loadPendingUserTrips()
-    loadPastUserTrips()
-    loadUpcomingUserTrips()
-    loadYearsExpense()
-    addDestinationOptions()
-  })
+//EventListeners
+window.addEventListener('load', promiseAll)
+newTripButton.addEventListener('click', showNewTrip)
+yourTripsButton.addEventListener('click', showYourTrips)
+loginForm.addEventListener('submit', checkLogin)
+
+//---------login------//
+function checkLogin(event) {
+  event.preventDefault();
+  let username = loginUsername.value;
+  let password = loginPassword.value;
+  let usernameID = username.split(/(\d+)/);
+
+  if(usernameID[0] === 'traveler' && usernameID[1] > 0 && usernameID[1] < 51 && password === 'travel') {
+    loginPage.classList.add('hidden');
+    navBar.classList.remove('hidden');
+    yourTripsPage.classList.remove('hidden')
+    loadUserPage(usernameID[1])
+  } else {
+    loginError.innerHTML = `Oops, try again!`
+  }
+}
+
+//------Promises/loadPage--------//
+function loadUserPage(id) {
+  promiseAll().then((responses) => {
+    assignData(responses)
+    const singleTraveler = travelerData.travelers.find((traveler) => {
+      return traveler.id === parseInt(id)
+    })
+      currentUser = new Traveler(singleTraveler, tripData)
+      loadUsername()
+      loadPendingUserTrips()
+      loadPastUserTrips()
+      loadUpcomingUserTrips()
+      loadYearsExpense()
+      addDestinationOptions()
+    })
+  }
 
 function assignData(responses) {
     travelerData = responses[0]
@@ -43,31 +78,38 @@ function assignData(responses) {
     destinationData = responses[2]
 }
 
-//EventListeners
-window.addEventListener('load', promiseAll)
-newTripButton.addEventListener('click', showNewTrip)
-yourTripsButton.addEventListener('click', showYourTrips)
-
-//functions
+//------functions------
 function loadUsername() {
   name.innerHTML += currentUser.name
 }
 
+function showNewTrip() {
+  console.log('hey')
+  newTripPage.classList.remove('hidden')
+  yourTripsPage.classList.add('hidden')
+}
+
+function showYourTrips() {
+  newTripPage.classList.add('hidden')
+  yourTripsPage.classList.remove('hidden')
+}
+
 function loadPendingUserTrips() {
-  pendingTripCards.innerHTML = `<h1>Pending Trips</h1>`
-currentUser.getPendingTrips().forEach((trip)=> {
-  destinationData.destinations.forEach((destination) =>{
-    if (destination.id === trip.destinationID) {
-  pendingTripCards.innerHTML += `<article class="trip-card">
-  <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
-  <p class="destination">destination: ${destination.destination}</p>
-  <p class="date">date: ${trip.date}</p>
-  <p class="duration">duration: ${trip.duration}</p>
-  <p class="traveler-count">Travelers: ${trip.travelers}</p>
-  <p class="trip-status">Status: ${trip.status}</p>
-</article>`
-} 
-})
+
+  pendingTripCards.innerHTML = `<h1>PendingTrips</h1>`
+  currentUser.getPendingTrips().forEach((trip)=> {
+    destinationData.destinations.forEach((destination) =>{
+      if (destination.id === trip.destinationID) {
+    pendingTripCards.innerHTML += `<article class="trip-card">
+    <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
+    <p class="destination">destination: ${destination.destination}</p>
+    <p class="date">date: ${trip.date}</p>
+    <p class="duration">duration: ${trip.duration}</p>
+    <p class="traveler-count">Travelers: ${trip.travelers}</p>
+    <p class="trip-status">Status: ${trip.status}</p>
+  </article>`
+  } 
+  })
 })
 }
 
@@ -151,7 +193,7 @@ newTripForm.addEventListener('submit', (event) => {
       assignData(data),
       currentUser.allUserTrips = tripData.trips.filter(trip => trip.userID === currentUser.id)
       pendingTripCards.innerHTML = ''
-      yearsExpense.innerHTML =''
+      yearsExpense.innerHTML = ''
       loadPendingUserTrips()
       loadYearsExpense()
       })
@@ -169,14 +211,3 @@ newTripForm.addEventListener('change', () => {
   })
   tripEstimate.innerHTML = `This trip's estimate is: $${sum}`
 })
-
-function showNewTrip() {
-  console.log('hey')
-  newTripPage.classList.remove('hidden')
-  yourTripsPage.classList.add('hidden')
-}
-
-function showYourTrips() {
-  newTripPage.classList.add('hidden')
-  yourTripsPage.classList.remove('hidden')
-}
