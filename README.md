@@ -83,7 +83,7 @@ The program displays user data through individual trip cards and the user can al
 [screen-recorder-tue-sep-27-2022-10-50-41.webm](https://user-images.githubusercontent.com/103971359/192587834-3a30d761-d2d4-457e-b95a-1feaa2ab5215.webm)
 
 ## Accessibilty
-This application has 0 errors on the 
+This application has 0 errors on the WAVE(Web Accessibility Evaluation Tool) and a score of 100% with Lighthouse.
 
 New feature ideas: 
 - [ ] A login for a travel agency
