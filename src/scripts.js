@@ -1,6 +1,7 @@
 import './css/styles.css';
 import { postData, promiseAll } from './api-calls.js';
 import Traveler from './Traveler.js';
+import dayjs from 'dayjs';
 
 const pendingTripCards = document.querySelector('#pendingTripCardsContainer')
 const yearsExpense = document.querySelector('#expenses')
@@ -53,11 +54,11 @@ function loadUsername() {
 }
 
 function loadPendingUserTrips() {
+  pendingTripCards.innerHTML = `<h1>Pending Trips</h1>`
 currentUser.getPendingTrips().forEach((trip)=> {
   destinationData.destinations.forEach((destination) =>{
     if (destination.id === trip.destinationID) {
-  pendingTripCards.innerHTML += `<h1>Pending Trips</h1>
-  <article class="trip-card">
+  pendingTripCards.innerHTML += `<article class="trip-card">
   <img class="card-images" src=${destination.image} alt=${destination.alt} height="240px" width="350px">
   <p class="destination">destination: ${destination.destination}</p>
   <p class="date">date: ${trip.date}</p>
@@ -127,17 +128,18 @@ function addDestinationOptions() {
 
 newTripForm.addEventListener('submit', (event) => {
   event.preventDefault()
+  const dateValue = dayjs(newTripDate.value).format().slice(0, 10).split('-').join('/');
   const formData = new FormData(event.target)
-  const formLocation = formData.get('destination')
+  const formLocation = addDestinations.value
   const locationID = destinationData.destinations.find((destination) => destination.destination === formLocation) 
   
   const newTripData = {
     id: Date.now(),
     userID: currentUser.id,
     destinationID: locationID.id,
-    travelers: parseInt(formData.get('travelerAmount')),
-    date: formData.get('date'),
-    duration: parseInt(formData.get('duration')),
+    travelers: parseInt(travelerCount.value),
+    date: dateValue,
+    duration: parseInt(newTripDuration.value),
     status: 'pending',
     suggestedActivities: []
   }
