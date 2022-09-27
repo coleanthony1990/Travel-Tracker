@@ -1,6 +1,7 @@
 import './css/styles.css';
 import { postData, promiseAll } from './api-calls.js';
 import Traveler from './Traveler.js';
+import dayjs from 'dayjs'
 
 const pendingTripCards = document.querySelector('#pendingTripCardsContainer')
 const yearsExpense = document.querySelector('#expenses')
@@ -83,7 +84,6 @@ function loadUsername() {
 }
 
 function showNewTrip() {
-  console.log('hey')
   newTripPage.classList.remove('hidden')
   yourTripsPage.classList.add('hidden')
 }
@@ -168,22 +168,23 @@ function addDestinationOptions() {
 
 newTripForm.addEventListener('submit', (event) => {
   event.preventDefault()
-  const formData = new FormData(event.target)
-  const formLocation = formData.get('destination')
+  const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
+  const dateValue = dayjs(newTripDate.value).format().slice(0, 10).split('-').join('/');
+  const formLocation = addDestinations.value
   const locationID = destinationData.destinations.find((destination) => destination.destination === formLocation) 
   
   const newTripData = {
     id: Date.now(),
     userID: currentUser.id,
     destinationID: locationID.id,
-    travelers: parseInt(formData.get('travelerAmount')),
-    date: formData.get('date'),
-    duration: parseInt(formData.get('duration')),
+    travelers: parseInt(travelerCount.value),
+    date: dateValue,
+    duration: parseInt(newTripDuration.value),
     status: 'pending',
     suggestedActivities: []
   }
-  if (!newTripData.date.includes('/')) {
-    alert('Please enter date in the correct format')
+  if (todayDate < dateValue) {
+    alert ('Please enter a future date')
   } else {
     postData(newTripData)
     .then(
