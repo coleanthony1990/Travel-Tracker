@@ -11,7 +11,6 @@ const addDestinations = document.querySelector('#newTripDestination')
 const newTripDate = document.getElementById('newTripDate')
 const newTripDuration = document.getElementById('newTripDuration')
 const travelerCount = document.getElementById('travelerNumber')
-const submitNewTrip = document.getElementById('submitNewTrip')
 const newTripForm = document.getElementById('newTripForm')
 const tripEstimate = document.getElementById('estimateValue')
 const pastTripCards = document.getElementById('pastTripCardsContainer')
@@ -26,7 +25,6 @@ const loginForm = document.querySelector('.login-form');
 const loginUsername = document.querySelector('#usernameInput');
 const loginPassword = document.querySelector('#passwordInput');
 const loginError = document.querySelector('.error');
-const loginButton = document.querySelector('.login-button')
 
 let currentUser;
 let travelerData;
@@ -173,8 +171,6 @@ newTripForm.addEventListener('submit', (event) => {
   const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
   const dateValue = dayjs(newTripDate.value).format().slice(0, 10).split('-').join('/');
   const locationID = destinationData.destinations.find((destination) => destination.destination === addDestinations.value) 
-  const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
-
   
   const newTripData = {
     id: Date.now(),
