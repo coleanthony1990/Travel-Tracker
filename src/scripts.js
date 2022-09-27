@@ -129,9 +129,8 @@ function addDestinationOptions() {
 newTripForm.addEventListener('submit', (event) => {
   event.preventDefault()
   const dateValue = dayjs(newTripDate.value).format().slice(0, 10).split('-').join('/');
-  const formData = new FormData(event.target)
-  const formLocation = addDestinations.value
-  const locationID = destinationData.destinations.find((destination) => destination.destination === formLocation) 
+  const locationID = destinationData.destinations.find((destination) => destination.destination === addDestinations.value) 
+  const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
   
   const newTripData = {
     id: Date.now(),
@@ -143,8 +142,8 @@ newTripForm.addEventListener('submit', (event) => {
     status: 'pending',
     suggestedActivities: []
   }
-  if (!newTripData.date.includes('/')) {
-    alert('Please enter date in the correct format')
+  if (dateValue > todayDate) {
+    alert('Please choose a date in the future')
   } else {
     postData(newTripData)
     .then(
