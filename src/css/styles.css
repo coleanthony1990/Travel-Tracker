@@ -112,9 +112,11 @@ body {
   font-family: Changa;
   box-shadow: 2px 2px 2px grey;
 }
+
 .trip-card:hover {
   transform: scale(1.05);
 }
+
 #tripCards {
   display: flex;
   align-content: space-around;
