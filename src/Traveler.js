@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 class Traveler {
   constructor(details, tripData) {
     this.id = details.id
@@ -15,7 +17,8 @@ class Traveler {
   getPastTrips() {
     const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/"); 
     const pastTrips = this.allUserTrips.filter((trip) => {
-      if( trip.date < todayDate) {
+      const formattedDate = dayjs(trip.date).format('YYYY/MM/DD')
+      if( formattedDate < todayDate) {
         return trip
       }
     })
@@ -24,7 +27,8 @@ class Traveler {
   getFutureTrips() {
     const todayDate = new Date().toISOString().slice(0, 10).split("-").join("/");
     const futureTrips = this.allUserTrips.filter((trip) => {
-      if( trip.date > todayDate) {
+      const formattedDate = dayjs(trip.date).format('YYYY/MM/DD')
+      if( formattedDate > todayDate) {
         return trip
       }
     })

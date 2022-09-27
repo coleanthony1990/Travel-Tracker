@@ -183,7 +183,7 @@ newTripForm.addEventListener('submit', (event) => {
     suggestedActivities: []
   }
 
-  if (dateValue > todayDate) {
+  if (dateValue < todayDate) {
     alert('Please choose a date in the future')
   } else {
     postData(newTripData)
