@@ -9,6 +9,7 @@
 - [Getting Started](#getting-started)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Accessibilty](#Accessibilty)
 - [Testing](#testing)
 - [Contact](#contact)
 - [Acknowledgments](#acknowledgments)
@@ -77,39 +78,28 @@ You can find the project [here](https://github.com/coleanthony1990/Travel-Tracke
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-* The program displays user data through individual trip cards and the user can also enter a new trip and see that trip displayed among their other trip cards.
-<!-- <img width="1428" alt="Screen Shot 2022-09-04 at 12 14 24 PM" src="https://user-images.githubusercontent.com/94808267/188327742-03ee3310-d07a-498b-8213-637de49ab7ef.png"> -->
+The program displays user data through individual trip cards and the user can also enter a new trip and see that trip displayed among their other trip cards.
 
-| Destktop View | Mobile View |
-|---------------|-----------------|
-<img src="https://media.giphy.com/media/6QMupVufGnhGwmbZpj/giphy.gif" width=100%>|<p align="center"><br/><img src="https://media.giphy.com/media/5D3KvzWgqlYy7nBR5x/giphy.gif" width=77%></p>
+[screen-recorder-tue-sep-27-2022-10-50-41.webm](https://user-images.githubusercontent.com/103971359/192587834-3a30d761-d2d4-457e-b95a-1feaa2ab5215.webm)
+
+## Accessibilty
+This application has 0 errors on the 
 
 New feature ideas: 
-- [x] During Part Two of the project:
-    - [x] The activity box will contain a chart that displays the user's daily activity.
-    - [x] Add a weekly graph of the users activity.
-    - [x] A user will be able to add data to their hydration, sleep, or activity.
-    - [x] A user will be able to see the comparison of their data to all the users average data.
-- [x] The friends buttons will be clickable to display their information instead of the user that appeared when the page loaded. 
-- [x] The friends hydration and sleep information can be displayed in a box as an average between them.
-- [x] The user will be able to toggle between different sets of charts.
-- [x] The user will be able to change the weekly data projected in the charts.
-- [x] The user details is hidden and viewable after a click on their profile icon.
+- [ ] A login for a travel agency
+    - [x] the travel agent will be able to approve bookings that are pending.
+- [ ] Add a a year-by-year graph of the users trip activity.
+- [ ] Users will be able to click on the trip card to display more information about the trip
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Testing
-We utilized TDD to create our project using [Mocha](https://mochajs.org/) & [Chai](https://www.chaijs.com/).
+I utilized TDD to create our project using [Mocha](https://mochajs.org/) & [Chai](https://www.chaijs.com/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
-[![Contributors][contributors-shield]][contributors-url]
-
-Emily Miles - [LinkedIn](https://www.linkedin.com/in/emilyjmiles/) - ms.emily.j.miles@gmail.com
-
-Hannah Celemen - [LinkedIn](https://www.linkedin.com/in/hannah-celemen/) - hclaire.celemen@gmail.com
 
 Cole Anthony - [LinkedIn](https://www.linkedin.com/in/cole-edwin-anthony/) - cole.edwin.anthony@gmail.com
 
@@ -120,36 +110,21 @@ Cole Anthony - [LinkedIn](https://www.linkedin.com/in/cole-edwin-anthony/) - col
 The following resources helped us build this project:
 
 [![MDN Docs][MDN-shield]][MDN]
-[![Chart.js][Charts]][charts-url]
-[![Chart.js-tutorials][youtube-shield]][charts-youtube-link]
+[![DAY.JS](https://img.shields.io/static/v1?label=&message=DAY.JS&color=%23f57242&style=for-the-badge)](https://https://day.js.org/en/)
 [![Turing School](https://img.shields.io/badge/Turing_School-030303?style=for-the-badge)](https://turing.edu/)
 [![Chai Assertion Library](https://img.shields.io/badge/chai-A30701?style=for-the-badge&logo=chai&logoColor=white)](https://www.chaijs.com/api/bdd/)
+![Stack Overflow](https://img.shields.io/badge/-Stackoverflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Reflections
-We worked on making the UI/UX design of our page to be responsive to ensure that it is easy to navigate and viewable on any device. We wanted our page to be user accessible by carefully choosing the font and color scheme, as well as using semantic html for screen reader accessibility.
+I wanted to make the data manipulation as simple as I could for readability. I believe I did by utilizing the datasets to pass through a single class. this allowed me to always be working with a single user ID's set of trips. Thinking about it this way allowed me to keep my code clean and streamlined.
 
-In Part 1, we learned how to retrieve data from provided Endpoints to create our bar charts. It required a lot of research and how to properly configure them to look uniform with our page. We hope to project user data in other chart forms that will more concisely show the user their progress.
-
-At the start of this project, we were all concerned about the size and complexity of the work that needed to be done. To our surprise, the experience was much smoother and less stressful than we had anticipated. We feel this was due to our continuous communication and supportive teamwork throughout the project.
-
-In Part 2, we learned how to work with more complex data sets, work with a local server, how to post data to a server and we built upon our knowledge of how to display the data we worked with in our charts. As our styling was mostly finished by Part 1, this time for Part 2 was mostly spent improving functionality and making sure our validations were working properly. We implemented preventative error handling in our input fields so only valid data to be posted to the server, as well as handling for failed HTTP requests and server errors.
-
-We continued our excellent communication and support of one another to enhance our working conditions. We successfully completed this project working asynchronously and holding stand-ups to discuss our work to verify everyone understood the changes before pushing them up. We are all very proud of the work we did with this project!
+Something I had trouble with was refetching my data after I posted new data to the server. I eventually realized my re-fetch function was not waiting for the data to be pasted so I had to refactor my api calls to allow for my post to be in a promise and my refetch to wait for it to post.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[youtube-shield]: https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white
-[charts-youtube-link]: https://www.youtube.com/c/ChartJS-tutorials
 [MDN-shield]: https://img.shields.io/badge/MDN_Web_Docs-black?style=for-the-badge&logo=mdnwebdocs&logoColor=white
 [MDN]:https://developer.mozilla.org/en-US/
-[charts-url]: https://www.chartjs.org/docs/latest/
-[Charts]: https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white
-[contributors-shield]: https://img.shields.io/badge/Contributors-3-2ea44f?style=for-the-badge
-[contributors-url]: https://github.com/emilyjmiles/fitlit-group-project/graphs/contributors
-
-[product-screenshot]: images/screenshot.png
-
