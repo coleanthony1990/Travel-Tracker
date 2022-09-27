@@ -9,18 +9,7 @@
   <title>Travel Tracker</title>
 </head>
 <body>
-  <section class="login-page">
-    <form class="login-form">
-      <h1 class="login-header">AROUND </h1>
-      <label class="login-inputs" for="usernameInput">Username:</label><br>
-      <input class="login-inputs" id="usernameInput" type="text" placeholder="username" required/><br><br>
-      <label class="login-inputs" for="passwordInput">Password:</label><br>
-      <input class="login-inputs" id="passwordInput" type="password" placeholder="password" required/><br><br>
-      <p class="error"></p>
-      <button type="submit" class="login-button">Submit</button>
-    </form>
-  </section>
-  <nav id="navBar" class="nav-bar hidden">
+  <nav id="navBar" class="nav-bar">
     <section id="leftHeader">
       <button class="leftHeaderButtons" id="yourTripButton">Your Trips</button>
       <button class="leftHeaderButtons" id="newTripButton">New Trip</button>
@@ -34,7 +23,7 @@
     </section>
   </nav>
   <main id="underNav">
-    <section class="your-trips hidden" id="yourTrips">
+    <section class="your-trips" id="yourTrips">
       <h1 id="yourTripsTitle">Your Trips</h1>
       <article id="expenses"></article>
       <div id="tripCards">

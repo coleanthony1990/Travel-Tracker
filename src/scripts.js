@@ -36,33 +36,13 @@ let destinationData;
 window.addEventListener('load', promiseAll)
 newTripButton.addEventListener('click', showNewTrip)
 yourTripsButton.addEventListener('click', showYourTrips)
-loginForm.addEventListener('submit', checkLogin)
 
-//---------login------//
-function checkLogin(event) {
-  event.preventDefault();
-  let username = loginUsername.value;
-  let password = loginPassword.value;
-  let usernameID = username.split(/(\d+)/);
-
-  if(usernameID[0] === 'traveler' && usernameID[1] > 0 && usernameID[1] < 51 && password === 'travel') {
-    loginPage.classList.add('hidden');
-    navBar.classList.remove('hidden');
-    yourTripsPage.classList.remove('hidden')
-    loadUserPage(usernameID[1])
-  } else {
-    loginError.innerHTML = `Oops, try again!`
-  }
-}
 
 //------Promises/loadPage--------//
-function loadUserPage(id) {
+
   promiseAll().then((responses) => {
     assignData(responses)
-    const singleTraveler = travelerData.travelers.find((traveler) => {
-      return traveler.id === parseInt(id)
-    })
-      currentUser = new Traveler(singleTraveler, tripData)
+      currentUser = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)], tripData)
       loadUsername()
       loadPendingUserTrips()
       loadPastUserTrips()
@@ -70,7 +50,7 @@ function loadUserPage(id) {
       loadYearsExpense()
       addDestinationOptions()
     })
-  }
+  
 
 function assignData(responses) {
     travelerData = responses[0]
@@ -84,7 +64,6 @@ function loadUsername() {
 }
 
 function showNewTrip() {
-  console.log('hey')
   newTripPage.classList.remove('hidden')
   yourTripsPage.classList.add('hidden')
 }
@@ -184,7 +163,7 @@ newTripForm.addEventListener('submit', (event) => {
     status: 'pending',
     suggestedActivities: []
   }
-  if (dateValue > todayDate) {
+  if (dateValue < todayDate) {
     alert('Please choose a date in the future')
   } else {
     postData(newTripData)
