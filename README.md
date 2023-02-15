@@ -64,7 +64,7 @@ You can find the project [here](https://github.com/coleanthony1990/Travel-Tracke
    ``` 
 3. Clone down the api repo
    ```sh
-  git clone git@github.com:turingschool-examples/travel-tracker-api.git
+   git clone git@github.com:turingschool-examples/travel-tracker-api.git
    ```
 4. Install api NPM packages
    ```sh
